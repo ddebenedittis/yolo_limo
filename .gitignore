@@ -1,0 +1,7 @@
+.venv
+datasets
+detect
+img
+vid
+
+*.pt

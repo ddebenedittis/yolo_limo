@@ -8,6 +8,8 @@ RUN --mount=type=cache,sharing=locked,target=/var/cache/apt --mount=type=cache,s
     x11-common \
     x11-utils
 
+RUN pip3 install opencv-python
+
 # # Change HOME environment variable
 ENV HOME=/home
 

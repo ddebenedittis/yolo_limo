@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 # Load a model
-model = YOLO("yolov26n.pt")  # or yolo8s.pt, depending on what you have installed
+model = YOLO("yolo26n.pt")  # or yolo8s.pt, depending on what you have installed
 
 # Train the model
 result = model.train(
@@ -9,6 +9,6 @@ result = model.train(
     imgsz=960,
     epochs=200,
     project="/home/ws/detect",
-    name="yolov26n-custom",
+    name="yolo26n-custom",
     exist_ok=True,
 )

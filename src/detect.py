@@ -27,9 +27,15 @@ fading_trajectory = True  # True = fading trails, False = non-fading full trajec
 decay = 0.995          # closer to 1.0 = longer trails, lower = faster fade
 trail_alpha = 2.0     # how strong the canvas is when overlaid
 
+radius = 20
+thickness = 10
+
 model = YOLO("/home/ws/detect/yolov8n-custom/weights/best.pt")
-video_path = "/home/ws/vid/C0940.mp4"
+video_path = "/home/ws/vid/C1005.mp4"
 cap = cv2.VideoCapture(video_path)
+
+if not cap.isOpened():
+    raise FileNotFoundError(f"Cannot open video file: {video_path}")
 
 track_history = defaultdict(lambda: [])
 
@@ -75,7 +81,7 @@ while cap.isOpened():
             c = tuple(int(c.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))  # RGB
             c_bgr = (c[2], c[1], c[0])  # BGR for OpenCV
 
-            cv2.line(traj_canvas, p1, p2, c_bgr, thickness=5, lineType=cv2.LINE_AA)
+            cv2.line(traj_canvas, p1, p2, c_bgr, thickness=thickness, lineType=cv2.LINE_AA)
 
     if fading_trajectory:
         # 3) overlay the trail canvas onto the current frame
@@ -109,7 +115,6 @@ while cap.isOpened():
 
     # -------- BIG CURRENT POSITION DOT (ephemeral) --------
     # Draw only for currently visible IDs
-    radius = 10
     for track_id in active_ids:
         track = track_history[track_id]
         if not track:

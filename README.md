@@ -12,6 +12,32 @@ python3 -m venv .venv
 pip3 install -r requirements.txt
 ```
 
+## Labelme Usage
+
+Enter in the .venv and run labelme with
+```shell
+labelme
+```
+
+Label your dataset. Once done, run
+```shell
+labelme2yolo --json_dir ./img --val_size 0.20
+```
+to export the dataset in a Yolo-compatible format.
+
+Move the dataset in the datasets folder.
+
+The dataset.yaml file will be like this:
+```yaml
+train: ./images/train
+val: ./images/val
+test:
+
+names:
+    1: limo
+    0: limo_arm
+```
+
 ## Docker
 
 Install Docker following [this guide](https://github.com/ddebenedittis/docker_ros_nvidia?tab=readme-ov-file#usage).
